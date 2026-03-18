@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Result</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Exam Result for {{ course.name }}</h1>
+        <h2>Total Score: {{ total_score }}</h2>
+        <div class="card">
+            <div class="card-header">
+                <h5>Question Results</h5>
+            </div>
+            <div class="card-body">
+                {% for result in results %}
+                    <div class="mb-3">
+                        <h6>{{ result.question.question_text }}</h6>
+                        <p>Grade: {{ result.question.question_grade }}</p>
+                        <p>Selected Choices:</p>
+                        <ul>
+                            {% for choice in result.selected_choices %}
+                                <li>{{ choice.choice_text }} {% if choice.is_correct %}(Correct){% endif %}</li>
+                            {% endfor %}
+                        </ul>
+                        <p class="{% if result.correct %}text-success{% else %}text-danger{% endif %}">
+                            {% if result.correct %}Correct{% else %}Incorrect{% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <a href="{% url 'onlinecourse:course_details' course.id %}" class="btn btn-primary">Back to Course</a>
+    </div>
+</body>
+</html>
