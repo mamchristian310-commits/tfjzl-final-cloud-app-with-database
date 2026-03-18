@@ -36,15 +36,15 @@
 </nav>
 
 <div class="container-fluid">
-    {% if grade > 80 %}
+    {% if total_score > 80 %}
     <div class="alert alert-success">
        <!--HINT Display passed info -->
-       <strong>Congratulations! {{ user.first_name }}, you have passed the exam with a grade of {{ grade }}/100.</strong>
+       <strong>Congratulations! {{ user.username }}, you have passed the exam with a grade of {{ total_score }}/100.</strong>
     </div>
         {% else %}
         <div class="alert alert-danger">
             <!--HINT Display failed info -->
-            <strong>Sorry, {{ user.first_name }}, you have failed the exam with a grade of {{ grade }}/100.</strong>
+            <strong>Sorry, {{ user.username }}, you have failed the exam with a grade of {{ total_score }}/100.</strong>
         </div>
         <a class="btn btn-link text-danger" href="{% url 'onlinecourse:course_details' course.id %}">Re-test</a>
         {% endif %}
